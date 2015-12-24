@@ -1,0 +1,64 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Montecarlo Solitaire</title>
+	<script src="js/phaser.min.js"></script>
+	<script src="js/carta.js"></script>
+	<script src="js/gamelogic.js"></script>
+	<script src="js/posiciontablero.js"></script>
+	<script src="js/resources.js"></script>
+	<script src="js/gamelogic.js"></script>
+	<script src="js/barajaobject.js"></script>
+	<script src="js/tableromontecarlo.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+	
+var game = new Phaser.Game(1024, 768, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+
+
+var baraja = new BarajaObject();
+var tablero = new TableroMontecarlo();
+var gameLogic = new GameLogic(tablero);
+
+	
+function preload() 
+{		
+	allocateMemoryAndLoadAssets(baraja.baraja);
+}
+
+function create() 
+{
+	game.stage.backgroundColor = "#21a734";
+
+	var style = { font: "52px Arial", fill: "#ffffff", align: "center" };
+	var text = game.add.text(240, 640, "Remaining cards: 52", style);
+	gameLogic.setText(text);
+
+	var style_rules = { font: "26px Arial", fill: "#ffffff", align: "left" };
+	var rules = "1.- Forma pares de cartas con igual valor \n(seis corazones con seis de pica, por ejemplo)\n\n"
+							+ "2.- Remueve esos pares del tablero. \nQuedaran espacios\n\n"
+							+ "3.- Presiona la pila de cartas, las cartas se \nagruparan y se llenaran los espacios vacios\n\n"
+							+ "4.- El objetivo es sacar el mayor numero de \ncartas del juego.\n\n";
+
+	game.add.text(460, 240, rules, style_rules);
+
+	tablero.setGamelogic(gameLogic);
+
+	baraja.shuffle();
+	tablero.llenarTablero(baraja);
+
+}
+
+function update() 
+{
+
+}
+
+</script>
+
+</body>
+</html>
