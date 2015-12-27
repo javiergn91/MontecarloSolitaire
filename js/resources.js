@@ -23,4 +23,5 @@ function allocateMemoryAndLoadAssets(baraja, tablero)
 	}
 	
 	game.load.image("facedown_blue", "assets/Cartas/FaceDown_Blue.png");
+	game.load.image("empty_deck", "assets/Cartas/empty_deck.png");
 }

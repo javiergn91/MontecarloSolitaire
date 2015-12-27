@@ -37,7 +37,12 @@ TableroMontecarlo.prototype.llenarTablero = function(baraja)
 		}
 	}
 
-	this.sprite = game.add.sprite(this.deckPosX, this.deckPosY, "facedown_blue");
+	this.setSprite("facedown_blue");
+}
+
+TableroMontecarlo.prototype.setSprite = function(img_src)
+{
+	this.sprite = game.add.sprite(this.deckPosX, this.deckPosY, img_src);
 	this.sprite.scale.setTo(.4, .4);
 	this.sprite.inputEnabled = true;
 	this.sprite.events.onInputDown.add(function()
@@ -101,8 +106,8 @@ TableroMontecarlo.prototype.refill = function()
 				var newCard = baraja.draw();
 				if(newCard == null) 
 				{
-					console.log(newCard);
 					this.sprite.destroy();
+					this.setSprite("empty_deck");
 					return;
 				}
 
